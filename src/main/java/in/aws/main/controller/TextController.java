@@ -11,6 +11,6 @@ public class TextController {
 
 	@GetMapping("text")
 	 public ResponseEntity<?> test() {
-        return ResponseEntity.ok("hey, Welcome to AWS deploy ");
+        return ResponseEntity.ok("hey, hd world!!!!!! ");
     }
 }
