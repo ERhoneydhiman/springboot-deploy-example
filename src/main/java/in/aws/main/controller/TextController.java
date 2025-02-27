@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class TextController {
 
 	@GetMapping("text")
-	 public ResponseEntity<?> test() {
-        return ResponseEntity.ok("hey, hd world!!!!!! ");
-    }
+
+	public ResponseEntity<?> test() {
+		return ResponseEntity.ok("hey, Welcome to AWS deploy ");
+	}
+
+
 }
