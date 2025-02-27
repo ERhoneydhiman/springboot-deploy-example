@@ -1,15 +1,20 @@
- 
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim
-
-# Set the working directory
+# Stage 1: Build the Spring Boot application
+FROM maven:3.9.6-eclipse-temurin-17 AS builder
 WORKDIR /app
 
-# Copy the jar file to the container
-COPY target/*.jar app.jar
+# Copy project files and build the application
+COPY . .
+RUN mvn clean package -DskipTests
 
-# Expose the port the app runs on
+# Stage 2: Create a minimal runtime image
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+
+# Copy the generated JAR file from the builder stage
+COPY --from=builder /app/target/*.jar app.jar
+
+# Expose the port the application runs on
 EXPOSE 8080
 
-# Command to run the application
+# Run the application
 ENTRYPOINT ["java", "-jar", "app.jar"]
